@@ -1,0 +1,12 @@
+import pandas as pd from bs4 import BeautifulSoup
+soup = BeautifulSoup(html_data, 'html.parser')
+table = soup. find ( 'table')
+data = []
+for row in table.find all('tr') [1:1:
+cells = row. find all('td')
+date = cells [0]. text.strip()
+revenue = cells [11. text.strip()
+data. append ( [date, revenue])
+tes la_revenue = pd.DataFrame(data, columns=['Date', 'Revenue'])
+
+print(tesla_revenue.tail (5))
