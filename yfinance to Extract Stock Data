@@ -2,9 +2,12 @@ pip install yfinance==0.1.67
 mamba install bs4==4.10.0 -y
 pip install nbformat==4.2.0
 
-import finance as yf 
+
+import yfinance as yf
 import pandas as pd 
 import requests
+
+tesla = yf.Ticker("TSLA")
 
 url = "https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0220EN-SkillsNetwork/labs/project/revenue.htm"
 response = requests.get (url)
@@ -14,16 +17,5 @@ print ("Webpage downloaded successfully.")
 else:
 print("Failed to download webpage. Status code:", response. status_code)
 
-tesla = yf.Ticker("TSLA"')
-from bs4 import BeautifulSoup
-soup = BeautifulSoup(html_data, 'html.parser')
-table = soup. find( 'table')
-data = []
-for row in table.find_all('tr') |1:]:
-cells = row. find_all('td')
-date = cells [0].text.strip()
-revenue = cells[11. text.strip()
-data.append ( [date, revenue])'
-tes la_revenue = pd.DataFrame(data, columns=['Date', 'Revenue'])
-
-print/tesla_revenue.head().)
+tesla_data.reset_index(inplace=True)
+print(tesla_data. head ())
