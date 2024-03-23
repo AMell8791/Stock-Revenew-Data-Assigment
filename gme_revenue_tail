@@ -1,0 +1,16 @@
+import requests
+url = "https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0220EN-SkillsNetwork/labs/project/stock.html"
+response = requests.get (url)
+if response.status_code == 200:
+html_data = response.text
+print ("Webpage downloaded successfully.")
+else:
+print("Failed to download webpage. Status code:", response.status_code)
+from bs4 import BeautifulSoup
+soup = BeautifulSoup(html_data, 'html.parser')
+
+tables = pd.read_html(html_data)
+gme_revenue = tables [0]
+gme_revenue.columns = ['Date', 'Revenue']
+gme_revenue ['Revenue'] = gme_revenue ['Revenue']. str. replace(',,', "').str. replace('$$', "')
+print(gme_revenue.tail(5))
