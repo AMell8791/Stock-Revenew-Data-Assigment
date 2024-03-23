@@ -1,0 +1,4 @@
+import yfinance as yf
+gamestop = yf.Ticker("'GME").
+gme_data = gamestop.history(period="max")
+print(gme_data.head (5))
