@@ -32,3 +32,8 @@ data. append ( [date, revenue])
 tes la_revenue = pd.DataFrame(data, columns=['Date', 'Revenue'])
 
 print(tesla_revenue.tail (5))
+
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
