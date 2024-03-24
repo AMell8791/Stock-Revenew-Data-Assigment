@@ -1,20 +1,23 @@
-pip install yfinance==0.1.67
-mamba install bs4==4.10.0 -y
-pip install nbformat==4.2.0
+#Question 1: Use yfinance to Extract Stock Data
 
+pip install yfinance
 import yfinance as yf
-import pandas as pd 
-import requests
+
+Using the Ticker function enter the ticker symbol of the stock we want to extract data on to create a ticker object. The stock is Tesla and its ticker symbol is TSLA.
 
 tesla = yf.Ticker("TSLA")
 
+#Use the requests library to download the webpage https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0220EN-SkillsNetwork/labs/project/revenue.htm Save the text of the response as a variable named html_data.
+
 url = "https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0220EN-SkillsNetwork/labs/project/revenue.htm"
 response = requests.get (url)
-if response.status_code == 200:
-html data = response.text
-print ("Webpage downloaded successfully.")
-else:
-print("Failed to download webpage. Status code:", response. status_code)
+html_data = response.text
 
+#Using the ticker object and the function history extract stock information and save it in a dataframe named tesla_data. Set the period parameter to max so we get information for the maximum amount of time.
+
+tesla_data = tesla_ticker.history(period="max")
 tesla_data.reset_index(inplace=True)
-print(tesla_data. head ())
+
+Display the last 5 row of the tesla_revenue dataframe using the head function. Take a screenshot of the results.
+
+print(tesla_data.head(5))
