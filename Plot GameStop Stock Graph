@@ -6,12 +6,13 @@ import matplotlib.pyplot as plt
 
 # Download stock data for GameStop using yfinance
 gme_data = yf.download("GME", start="2020-01-01", end="2021-06-30", progress=False)
+gme_revenue = yf.download("GME", start="2020-01-01", end="2021-06-30", progress=False)
 
 # Define the make_graph function
-def make_graph(stock_data, revenue_data, title):
+def make_graph(gme_data, gme_revenue, title):
     plt.figure(figsize=(12, 8))
-    plt.plot(stock_data['Close'], label='GameStop Stock Data', color='blue')
-    plt.plot(revenue_data['Date'], revenue_data['Revenue'], label='GameStop Revenue', color='red')
+    plt.plot(gme_data['Close'], label='GameStop Stock Data', color='blue')
+    plt.plot(gme_revenue['Date'], gme_revenue['Revenue'], label='GameStop Revenue', color='red')
     plt.xlabel('Date')
     plt.ylabel('Value')
     plt.title(title)
