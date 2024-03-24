@@ -1,29 +1,16 @@
-!pip install yfinance==0.1.67
-!mamba install bs4==4.10.0 -y
-!pip install nbformat==4.2.0
-
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import yfinance as yf
 import matplotlib.pyplot as plt
 
-revenue_url =  "https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0220EN-SkillsNetwork/labs/project/revenue.htm"
-response = requests.get(revenue_url) 
-html_data = response.text
-soup = BeautifulSoup(html_data, 'html.parser')
-##gme_revenue = pd.read_html(str(soup.find('table'))[0]
-##gme_revenue.colums = ['Date', 'Revenue']
-
-gme_data = yf.download("GME", start="2020-01-01", end="2021-06-30", progress=False)
-
 # Download stock data for GameStop using yfinance
-##gme_data = yf.download("GME", start="2020-01-01", end="2021-06-30", progress=False)
+gme_data = yf.download("GME", start="2020-01-01", end="2021-06-30", progress=False)
 
 # Define the make_graph function
 def make_graph(stock_data, revenue_data, title):
-    plt.figure(figsize=(10, 6))
-    plt.plot(stock_data['Close'], label='GameStop Stock Price', color='blue')
+    plt.figure(figsize=(12, 8))
+    plt.plot(stock_data['Close'], label='GameStop Stock Data', color='blue')
     plt.plot(revenue_data['Date'], revenue_data['Revenue'], label='GameStop Revenue', color='red')
     plt.xlabel('Date')
     plt.ylabel('Value')
@@ -31,8 +18,8 @@ def make_graph(stock_data, revenue_data, title):
     plt.legend()
     plt.grid(True)
     plt.xticks(rotation=45)
-    plt.xlim(pd.Timestamp('2020-01-01'), pd.Timestamp('2021-06-30'))  # Limit x-axis to June 2021
+    plt.xlim(pd.Timestamp('2020-01-01'), pd.Timestamp('2021-06-30'))  # Limit to June 2021
     plt.show()
 
 # Call make_graph function with GameStop data
-make_graph(gme_data, gme_revenue, 'GameStop')                    
+make_graph(gme_data, gme_revenue, 'GameStop')
