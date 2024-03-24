@@ -1,0 +1,37 @@
+!pip install yfinance==0.1.67
+!mamba install bs4==4.10.0 -y
+!pip install nbformat==4.2.0
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+import yfinance as yf
+import matplotlib.pyplot as plt
+
+url = "https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-PY0220EN-SkillsNetwork/labs/project/stock.html"
+response = requests.get(url)
+html_data = response.text
+##soup = BeautifulSoup(html_data, 'html.parser')
+##tesla_revenue_table = soup.find('table')
+##tesla_revenue = pd.read_html(str(tesla_revenue_table))[0]
+##tesla_revenue.columns = ['Date', 'Revenue']
+##tesla_revenue['Revenue'] = tesla_revenue['Revenue'].str.replace(',,', '').str.replace('$$', '')
+
+
+tesla_data = yf.download("TSLA", start="2020-01-01", end="2021-06-01", progress=False)
+##tesla_revenue = yf.download("TSLA", start="2020-01-01", end="2021-06-01", progress=False)
+
+
+def make_graph(tesla_data, tesla_revenue, title):
+    plt.figure(figsize=(10, 6))
+    plt.plot(tesla_data['Close'], label='Tesla Stock Data', color='blue')
+    plt.plot(tesla_data['Date'], tesla_revenue['Revenue'], label='Tesla Revenue', color='red')
+    plt.xlabel('Date')
+    plt.ylabel('Value')
+    plt.title(title)
+    plt.legend()
+    plt.grid(True)
+    plt.xticks(rotation=45)
+    plt.xlim(pd.Timestamp('2020-01-01'), pd.Timestamp('2021-06-01'))
+    plt.show()
+
+make_graph(tesla_data, tesla_revenue,'Tesla')
